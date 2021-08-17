@@ -24,6 +24,9 @@
     ],
     "mm:early_risers": [
       "net.soularcana.asm.EarlyRiser"
+    ],
+    "rei_plugins": [
+      "net.soularcana.compat.rei.SoulArcanaREIPlugin"
     ]
   },
   "mixins": [

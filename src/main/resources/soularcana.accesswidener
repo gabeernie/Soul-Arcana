@@ -4,3 +4,7 @@ accessible    method    net/minecraft/client/item/ModelPredicateProviderRegistry
 
 accessible    method    net/minecraft/entity/damage/DamageSource    setBypassesArmor    ()Lnet/minecraft/entity/damage/DamageSource;
 accessible    method    net/minecraft/entity/damage/DamageSource    setFire    ()Lnet/minecraft/entity/damage/DamageSource;
+
+accessible    method    net/minecraft/recipe/ShapedRecipe    removePadding    ([Ljava/lang/String;)[Ljava/lang/String;
+accessible    method    net/minecraft/recipe/ShapedRecipe    getPattern    (Lcom/google/gson/JsonArray;)[Ljava/lang/String;
+accessible    method    net/minecraft/recipe/ShapedRecipe    createPatternMatrix    ([Ljava/lang/String;Ljava/util/Map;II)Lnet/minecraft/util/collection/DefaultedList;

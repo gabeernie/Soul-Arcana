@@ -1,0 +1,13 @@
+{
+  "type": "soularcana:globe_to_staff",
+  "base": {
+    "item": "soularcana:spell_staff"
+  },
+  "addition": {
+    "item": "soularcana:spell_globe",
+    "enchantment": "soularcana:poison"
+  },
+  "result": {
+    "item": "soularcana:poison_staff"
+  }
+}

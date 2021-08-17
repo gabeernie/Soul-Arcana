@@ -1,0 +1,21 @@
+{
+  "type": "soularcana:durability_aware_shaped",
+  "pattern": [
+    "###",
+    "#O#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:quartz"
+    },
+    "O": {
+      "item": "soularcana:soul_shard"
+    }
+  },
+  "result": {
+    "item": "soularcana:spell_globe",
+    "count": 1,
+    "durability": 0
+  }
+}

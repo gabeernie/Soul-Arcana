@@ -37,27 +37,27 @@ public class SoulArcanaItems
 
     public static void registerItems()
     {
-        registerItem(ARCANE_STAFF = new SpellStaffItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/, GlobeType.ARCANE), "arcane_staff");
-        registerItem(CURSE_STAFF = new SpellStaffItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/, GlobeType.CURSE), "curse_staff");
-        registerItem(FIRE_STAFF = new SpellStaffItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/, GlobeType.FIRE), "fire_staff");
-        registerItem(FROST_STAFF = new SpellStaffItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/, GlobeType.FROST), "frost_staff");
-        registerItem(POISON_STAFF = new SpellStaffItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/, GlobeType.POISON), "poison_staff");
-        registerItem(STORM_STAFF = new SpellStaffItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/, GlobeType.STORM), "storm_staff");
-        registerItem(STAFF = new Item(new Settings()/*.group(SoulArcana.ITEMGROUP)*/), "spell_staff");
+        registerItem(ARCANE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.ARCANE), "arcane_staff");
+        registerItem(CURSE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.CURSE), "curse_staff");
+        registerItem(FIRE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.FIRE), "fire_staff");
+        registerItem(FROST_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.FROST), "frost_staff");
+        registerItem(POISON_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.POISON), "poison_staff");
+        registerItem(STORM_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.STORM), "storm_staff");
+        registerItem(STAFF = new Item(new Settings().group(SoulArcana.ITEMGROUP)), "spell_staff");
 
-        registerItem(SPELL_GLOBE = new SpellGlobeItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/), "spell_globe");
+        registerItem(SPELL_GLOBE = new SpellGlobeItem(new Settings().group(SoulArcana.ITEMGROUP)), "spell_globe");
 
-        registerItem(LESSER_SOUL_GEM = new SoulGemItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/), "lesser_soul_gem");
-        registerItem(MIDDLING_SOUL_GEM = new SoulGemItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/), "middling_soul_gem");
-        registerItem(GREATER_SOUL_GEM = new SoulGemItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/), "greater_soul_gem");
-        registerItem(TITANIC_SOUL_GEM = new SoulGemItem(new Settings()/*.group(SoulArcana.ITEMGROUP)*/), "titanic_soul_gem");
+        registerItem(LESSER_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP)), "lesser_soul_gem");
+        registerItem(MIDDLING_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP)), "middling_soul_gem");
+        registerItem(GREATER_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP)), "greater_soul_gem");
+        registerItem(TITANIC_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP)), "titanic_soul_gem");
 
         SoulArcanaRecipes.registerGemRepairValue(LESSER_SOUL_GEM, 12);
         SoulArcanaRecipes.registerGemRepairValue(MIDDLING_SOUL_GEM, 25);
         SoulArcanaRecipes.registerGemRepairValue(GREATER_SOUL_GEM, 50);
         SoulArcanaRecipes.registerGemRepairValue(TITANIC_SOUL_GEM, 100);
 
-        registerItem(SOUL_SHARD = new Item(new Settings()/*.group(SoulArcana.ITEMGROUP)*/), "soul_shard");
+        registerItem(SOUL_SHARD = new Item(new Settings().group(SoulArcana.ITEMGROUP)), "soul_shard");
     }
 
     public static void registerItem(Item item, String name)

@@ -17,7 +17,7 @@ public class SoulArcanaBlocks
 
     public static void registerBlocks()
     {
-        var itemGroup = new Item.Settings()/*.group(SoulArcana.ITEMGROUP)*/;
+        var itemGroup = new Item.Settings().group(SoulArcana.ITEMGROUP);
 
         registerBlock(SOUL_SHARD_ORE = new OreBlock(Settings.of(Material.STONE)
                         .requiresTool()
