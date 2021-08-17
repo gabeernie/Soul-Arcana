@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "soularcana:middling_soul_gem"
+    },
+    {
+      "item": "soularcana:middling_soul_gem"
+    },
+    {
+      "item": "soularcana:middling_soul_gem"
+    },
+    {
+      "item": "soularcana:middling_soul_gem"
+    }
+  ],
+  "result": {
+    "item": "soularcana:titanic_soul_gem",
+    "count": 1
+  }
+}

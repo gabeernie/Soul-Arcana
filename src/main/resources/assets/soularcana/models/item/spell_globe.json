@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "soularcana:item/spell_globe"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "soularcana:globe": 0.01
+      },
+      "model": "soularcana:item/arcane_globe"
+    },
+    {
+      "predicate": {
+        "soularcana:globe": 0.02
+      },
+      "model": "soularcana:item/curse_globe"
+    },
+    {
+      "predicate": {
+        "soularcana:globe": 0.03
+      },
+      "model": "soularcana:item/fire_globe"
+    },
+    {
+      "predicate": {
+        "soularcana:globe": 0.04
+      },
+      "model": "soularcana:item/frost_globe"
+    },
+    {
+      "predicate": {
+        "soularcana:globe": 0.05
+      },
+      "model": "soularcana:item/poison_globe"
+    },
+    {
+      "predicate": {
+        "soularcana:globe": 0.06
+      },
+      "model": "soularcana:item/storm_globe"
+    }
+  ]
+}

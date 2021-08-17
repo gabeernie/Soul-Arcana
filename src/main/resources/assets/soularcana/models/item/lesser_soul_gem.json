@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "soularcana:item/lesser_soul_gem"
+  }
+}

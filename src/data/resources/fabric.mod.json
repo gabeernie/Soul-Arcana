@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "soularcana_datagen",
+  "version": "${version}",
+  "entrypoints": {
+    "preLaunch": [
+      "net.soularcana.data.SoulArcanaDatagenInitializer"
+    ]
+  }
+}

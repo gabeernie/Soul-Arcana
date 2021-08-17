@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "soularcana:lesser_soul_gem",
+    "soularcana:middling_soul_gem",
+    "soularcana:greater_soul_gem",
+    "soularcana:titanic_soul_gem"
+  ]
+}

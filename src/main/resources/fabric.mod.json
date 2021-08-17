@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "soularcana",
+  "version": "${version}",
+  "name": "Soul Arcana",
+  "description": "Magic.",
+  "authors": [
+    "Lich",
+    "Ourten"
+  ],
+  "contact": {
+    "homepage": "<none>",
+    "sources": "<none>"
+  },
+  "license": "Apache License 2.0",
+  "icon": "assets/soularcana/textures/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.soularcana.SoulArcana"
+    ],
+    "client": [
+      "net.soularcana.SoulArcanaClient"
+    ],
+    "mm:early_risers": [
+      "net.soularcana.asm.EarlyRiser"
+    ]
+  },
+  "mixins": [
+    "soularcana.mixins.json"
+  ],
+  "accessWidener": "soularcana.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

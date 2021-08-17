@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "soularcana:soul_shard"
+    },
+    {
+      "item": "soularcana:soul_shard"
+    },
+    {
+      "item": "soularcana:soul_shard"
+    },
+    {
+      "item": "soularcana:soul_shard"
+    }
+  ],
+  "result": {
+    "item": "soularcana:middling_soul_gem",
+    "count": 1
+  }
+}

@@ -1,0 +1,120 @@
+plugins {
+    id 'fabric-loom' version '0.9-SNAPSHOT'
+    id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+repositories {
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'VoxelIndustry'
+        url = 'https://maven.ferenyr.info/artifactory/libs-release'
+    }
+    maven {
+        name = 'Rougly Enough Items'
+        url = 'https://maven.shedaniel.me/'
+    }
+    maven {
+        name = 'ModMenu'
+        url = 'https://maven.terraformersmc.com/'
+    }
+
+    maven {
+        name = "Jitpack"
+        url 'https://jitpack.io/'
+    }
+    mavenCentral()
+}
+
+minecraft {
+    accessWidener = file("src/main/resources/soularcana.accesswidener")
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modImplementation "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+    implementation include("net.voxelindustry:brokkcolor:${project.brokkcolor_version}")
+
+    modImplementation include("com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}")
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.7.2')
+    testImplementation('org.mockito:mockito-core:3.11.2')
+    testImplementation('org.mockito:mockito-junit-jupiter:3.11.2')
+    testImplementation('org.assertj:assertj-core:3.20.2')
+
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.7.2')
+}
+
+sourceSets {
+    data {
+        compileClasspath += sourceSets.main.compileClasspath
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact(remapJar) {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
+}
+
+jar {
+    from "LICENSE"
+}
+
+processResources {
+    inputs.properties "version": project.version, "description": project.description
+
+    filesMatching(["fabric.mod.json", "pack.mcmeta"]) {
+        expand(
+                "version": project.version,
+                "description": project.description,
+                "repoOwner": project.repoOwner,
+                "repoName": project.repoName,
+                "id": project.modId,
+                "minecraftVersionLimit": project.minecraftVersionLimit,
+                "loaderVersionLimit": project.loaderVersionLimit
+        )
+    }
+}
