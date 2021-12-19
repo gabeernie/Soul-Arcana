@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import lombok.Getter;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -14,6 +15,7 @@ import net.minecraft.recipe.SmithingRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import net.soularcana.common.setup.SoulArcanaRecipes;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,13 +28,24 @@ public class GlobeToStaffRecipe extends SmithingRecipe
     private final Ingredient addition;
     private final ItemStack  result;
 
-    public GlobeToStaffRecipe(Identifier id, Ingredient base, Ingredient addition, ItemStack result)
+    private final Enchantment additionEnchant;
+
+    public GlobeToStaffRecipe(Identifier id, Ingredient base, Ingredient addition, Enchantment additionEnchant, ItemStack result)
     {
         super(id, base, addition, result);
 
         this.base = base;
         this.addition = addition;
+        this.additionEnchant = additionEnchant;
+
         this.result = result;
+    }
+
+    @Override
+    public boolean matches(Inventory inventory, World world)
+    {
+        var additionStack = inventory.getStack(1);
+        return super.matches(inventory, world) && additionStack.hasEnchantments() && EnchantmentHelper.fromNbt(additionStack.getEnchantments()).containsKey(additionEnchant);
     }
 
     @Override
@@ -88,7 +101,7 @@ public class GlobeToStaffRecipe extends SmithingRecipe
             var additionWithEnchantment = ingredientFromJSON(additionJSON);
 
             var result = ShapedRecipe.outputFromJson(JsonHelper.getObject(jsonObject, "result"));
-            return new GlobeToStaffRecipe(identifier, base, additionWithEnchantment.getKey(), result);
+            return new GlobeToStaffRecipe(identifier, base, additionWithEnchantment.getKey(), additionWithEnchantment.getValue(), result);
         }
     }
 }

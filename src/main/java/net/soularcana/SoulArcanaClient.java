@@ -6,10 +6,12 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.item.UnclampedModelPredicateProvider;
 import net.minecraft.client.render.Shader;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.soularcana.client.SoulArcanaParticles;
 import net.soularcana.client.particle.SpellParticle;
@@ -26,28 +28,48 @@ public class SoulArcanaClient implements ClientModInitializer
     @Override
     public void onInitializeClient()
     {
-        ModelPredicateProviderRegistry.register(SoulArcanaItems.SPELL_GLOBE, new Identifier(SoulArcana.MODID, "globe"), (stack, world, entity, seed) ->
+        var heldItemPredicateIdentifier = new Identifier(SoulArcana.MODID, "held_item");
+        UnclampedModelPredicateProvider heldItemPredicate = (stack, world, entity, seed) ->
         {
-            if (!stack.hasEnchantments())
+            if (world == null || entity == null)
                 return 0F;
 
-            var enchantments = EnchantmentHelper.fromNbt(stack.getEnchantments());
+            return 1F;
+        };
 
-            if (enchantments.containsKey(SoulArcanaEnchantments.ARCANE))
-                return 0.01F;
-            else if (enchantments.containsKey(SoulArcanaEnchantments.CURSE))
-                return 0.02F;
-            else if (enchantments.containsKey(SoulArcanaEnchantments.FIRE))
-                return 0.03F;
-            else if (enchantments.containsKey(SoulArcanaEnchantments.FROST))
-                return 0.04F;
-            else if (enchantments.containsKey(SoulArcanaEnchantments.POISON))
-                return 0.05F;
-            else if (enchantments.containsKey(SoulArcanaEnchantments.STORM))
-                return 0.06F;
+        for (Item staff : SoulArcanaItems.ITEM_STAVES)
+        {
+            ModelPredicateProviderRegistry.register(
+                    staff,
+                    heldItemPredicateIdentifier,
+                    heldItemPredicate);
+        }
 
-            return 0F;
-        });
+        ModelPredicateProviderRegistry.register(
+                SoulArcanaItems.SPELL_GLOBE,
+                new Identifier(SoulArcana.MODID, "globe"),
+                (stack, world, entity, seed) ->
+                {
+                    if (!stack.hasEnchantments())
+                        return 0F;
+
+                    var enchantments = EnchantmentHelper.fromNbt(stack.getEnchantments());
+
+                    if (enchantments.containsKey(SoulArcanaEnchantments.ARCANE))
+                        return 0.01F;
+                    else if (enchantments.containsKey(SoulArcanaEnchantments.CURSE))
+                        return 0.02F;
+                    else if (enchantments.containsKey(SoulArcanaEnchantments.FIRE))
+                        return 0.03F;
+                    else if (enchantments.containsKey(SoulArcanaEnchantments.FROST))
+                        return 0.04F;
+                    else if (enchantments.containsKey(SoulArcanaEnchantments.POISON))
+                        return 0.05F;
+                    else if (enchantments.containsKey(SoulArcanaEnchantments.STORM))
+                        return 0.06F;
+
+                    return 0F;
+                });
 
         EntityRendererRegistry.INSTANCE.register(SoulArcanaEntities.ARCANE_PROJECTILE, EmptyEntityRenderer::new);
         EntityRendererRegistry.INSTANCE.register(SoulArcanaEntities.CURSE_PROJECTILE, EmptyEntityRenderer::new);

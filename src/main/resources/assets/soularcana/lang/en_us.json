@@ -1,7 +1,7 @@
 {
   "itemGroup.soularcana.item_group": "Soul Arcana",
   "__comment": "Blocks",
-  "block.soularcana.soul_shard_ore": "Soul Shard Ore",
+  "block.soularcana.soul_sediment": "Soul Sediment",
   "__comment": "Items",
   "item.soularcana.spell_globe": "Spell Globe",
   "item.soularcana.arcane_globe": "Arcane Globe",

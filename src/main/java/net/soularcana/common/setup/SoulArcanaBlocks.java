@@ -13,17 +13,16 @@ import net.soularcana.SoulArcana;
 
 public class SoulArcanaBlocks
 {
-    public static Block SOUL_SHARD_ORE;
+    public static Block SOUL_SEDIMENT;
 
     public static void registerBlocks()
     {
         var itemGroup = new Item.Settings().group(SoulArcana.ITEMGROUP);
 
-        registerBlock(SOUL_SHARD_ORE = new OreBlock(Settings.of(Material.STONE)
-                        .requiresTool()
-                        .strength(3.0F, 3.0F), UniformIntProvider.create(2, 5)),
+        registerBlock(SOUL_SEDIMENT = new OreBlock(Settings.of(Material.SOIL)
+                        .strength(0.5F), UniformIntProvider.create(2, 5)),
                 itemGroup,
-                "soul_shard_ore");
+                "soul_sediment");
     }
 
     private static void registerBlock(Block block, Item.Settings settings, String name)

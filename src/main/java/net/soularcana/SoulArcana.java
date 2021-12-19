@@ -12,6 +12,7 @@ import net.soularcana.common.setup.SoulArcanaBlocks;
 import net.soularcana.common.setup.SoulArcanaEnchantments;
 import net.soularcana.common.setup.SoulArcanaEntities;
 import net.soularcana.common.setup.SoulArcanaItems;
+import net.soularcana.common.setup.SoulArcanaOres;
 import net.soularcana.common.setup.SoulArcanaRecipes;
 
 import java.util.logging.Logger;
@@ -32,12 +33,13 @@ public class SoulArcana implements ModInitializer
         SoulArcanaBlocks.registerBlocks();
         SoulArcanaItems.registerItems();
         SoulArcanaEnchantments.registerEnchantments();
+        SoulArcanaRecipes.registerRecipes();
 
         SoulArcanaEntities.registerEntities();
 
-        SoulArcanaRecipes.registerRecipes();
-
         SoulArcanaParticles.registerParticles();
+
+        SoulArcanaOres.registerOres();
 
         ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(EntityEvents::onEntityKill);
     }

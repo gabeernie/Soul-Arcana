@@ -17,6 +17,8 @@ public class SoulArcanaItems
 {
     public static final Tag<Item> TAG_SOUL_GEMS = TagRegistry.item(new Identifier(SoulArcana.MODID, "soul_gems"));
 
+    public static final Item[] ITEM_STAVES = new Item[6];
+
     public static Item STAFF;
 
     public static Item ARCANE_STAFF;
@@ -37,13 +39,14 @@ public class SoulArcanaItems
 
     public static void registerItems()
     {
-        registerItem(ARCANE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.ARCANE), "arcane_staff");
-        registerItem(CURSE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.CURSE), "curse_staff");
-        registerItem(FIRE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.FIRE), "fire_staff");
-        registerItem(FROST_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.FROST), "frost_staff");
-        registerItem(POISON_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.POISON), "poison_staff");
-        registerItem(STORM_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.STORM), "storm_staff");
+        registerItem(ITEM_STAVES[0] = ARCANE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.ARCANE), "arcane_staff");
+        registerItem(ITEM_STAVES[1] = CURSE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.CURSE), "curse_staff");
+        registerItem(ITEM_STAVES[2] = FIRE_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.FIRE), "fire_staff");
+        registerItem(ITEM_STAVES[3] = FROST_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.FROST), "frost_staff");
+        registerItem(ITEM_STAVES[4] = POISON_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.POISON), "poison_staff");
+        registerItem(ITEM_STAVES[5] = STORM_STAFF = new SpellStaffItem(new Settings().group(SoulArcana.ITEMGROUP), GlobeType.STORM), "storm_staff");
         registerItem(STAFF = new Item(new Settings().group(SoulArcana.ITEMGROUP)), "spell_staff");
+
 
         registerItem(SPELL_GLOBE = new SpellGlobeItem(new Settings().group(SoulArcana.ITEMGROUP)), "spell_globe");
 

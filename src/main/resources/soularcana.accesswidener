@@ -1,4 +1,6 @@
-accessWidener v1 named
+accessWidener v2 named
+
+extendable class net/minecraft/enchantment/EnchantmentTarget
 
 accessible    method    net/minecraft/client/item/ModelPredicateProviderRegistry    register    (Lnet/minecraft/item/Item;Lnet/minecraft/util/Identifier;Lnet/minecraft/client/item/UnclampedModelPredicateProvider;)V
 

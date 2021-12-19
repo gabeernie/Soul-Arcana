@@ -10,9 +10,9 @@ import net.voxelindustry.brokkcolor.Color;
 
 public class StormProjectileEntity extends GlobeProjectileEntity
 {
-    private static final Color PRIMARY_COLOR   = new Color(1, 1, 224 / 256F);
-    private static final Color SECONDARY_COLOR = new Color(214 / 256F, 214 / 256F, 120 / 256F);
-    private static final Color FADE_COLOR      = new Color(224 / 256F, 224 / 256F, 96 / 256F);
+    private static final Color PRIMARY_COLOR   = new Color(68 / 256F, 88 / 256F, 213 / 256F);
+    private static final Color SECONDARY_COLOR = new Color(12 / 256F, 0 / 256F, 90 / 256F);
+    private static final Color FADE_COLOR      = new Color(127 / 256F, 164 / 256F, 241 / 256F);
 
     public StormProjectileEntity(EntityType<?> type, World world)
     {

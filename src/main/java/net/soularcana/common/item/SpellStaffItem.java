@@ -32,6 +32,7 @@ public class SpellStaffItem extends Item
         this.globeType = globeType;
     }
 
+
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
@@ -52,8 +53,7 @@ public class SpellStaffItem extends Item
             var globeStack = SpellGlobeItem.getGlobeStack(globeType);
             globeStack.setDamage(context.getStack().getDamage());
 
-            if (!context.getPlayer().giveItemStack(globeStack))
-                context.getPlayer().dropItem(globeStack, true);
+            if (!context.getPlayer().giveItemStack(globeStack)) context.getPlayer().dropItem(globeStack, true);
 
             context.getStack().setCount(0);
 
@@ -70,19 +70,19 @@ public class SpellStaffItem extends Item
 
         if (!user.handSwinging)
         {
-            if (!world.isClient())
+            if (!world.isClient() && stack.getDamage() < stack.getMaxDamage() - 1)
             {
                 var pos = user.getPos().add(user.getRotationVector().multiply(0.5D)).add(0.5D * Math.sin(Math.toRadians(225.0F - user.getHeadYaw())), user.getHeight() * 2.0F / 3.0F, 0.5D * Math.cos(Math.toRadians(225.0F - user.getHeadYaw())));
                 var velocity = user.getCameraPosVec(0.0F).add(user.getRotationVector().multiply(40)).subtract(pos).multiply(0.05D);
 
                 world.spawnEntity(SoulArcanaEntities.getProjectileEntity(globeType).create(world).shoot(pos.x, pos.y, pos.z, velocity.x, velocity.y, velocity.z, user.getUuid()));
                 world.playSound(null, pos.x, pos.y, pos.z, SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.NEUTRAL, 0.75F, world.getRandom().nextFloat() * 0.2F + 0.9F);
+
                 stack.damage(1, user, player -> player.sendToolBreakStatus(hand));
             }
 
             return TypedActionResult.success(stack, true);
         }
-        else
-            return TypedActionResult.pass(stack);
+        else return TypedActionResult.pass(stack);
     }
 }
