@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "minecraft:ghast",
     "minecraft:blaze",
     "minecraft:enderman",
     "minecraft:evoker",
