@@ -32,6 +32,10 @@ repositories {
         name = "Jitpack"
         url 'https://jitpack.io/'
     }
+    maven { // Enchantments Description
+        name = 'BlameJared Maven (CrT / Bookshelf)'
+        url = 'https://maven.blamejared.com'
+    }
     mavenCentral()
 }
 
@@ -46,6 +50,10 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+    modImplementation("net.darkhax.enchdesc:EnchantmentDescriptions-Fabric-1.18.1:${project.enchant_desc_version}") {
+        exclude group: 'net.darkhax.enchdesc', module: 'Common'
+    }
+    modImplementation "net.darkhax.enchdesc:EnchantmentDescriptions-Common-1.18.1:${project.enchant_desc_version}"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     modImplementation "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
     implementation include("net.voxelindustry:brokkcolor:${project.brokkcolor_version}")
@@ -53,7 +61,7 @@ dependencies {
     modImplementation include("com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}")
 
     compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.2')
     testImplementation('org.mockito:mockito-core:4.1.0')
