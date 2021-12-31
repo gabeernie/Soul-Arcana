@@ -15,13 +15,9 @@ import net.soularcana.common.setup.SoulArcanaItems;
 import net.soularcana.common.setup.SoulArcanaOres;
 import net.soularcana.common.setup.SoulArcanaRecipes;
 
-import java.util.logging.Logger;
-
 public class SoulArcana implements ModInitializer
 {
     public static final String MODID = "soularcana";
-
-    public static final Logger LOGGER = Logger.getLogger(MODID);
 
     public static ItemGroup ITEMGROUP = FabricItemGroupBuilder.build(
             new Identifier(MODID, "item_group"),

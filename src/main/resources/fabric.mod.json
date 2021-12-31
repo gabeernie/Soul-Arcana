@@ -13,7 +13,7 @@
     "sources": "<none>"
   },
   "license": "Apache License 2.0",
-  "icon": "assets/soularcana/textures/icon.png",
+  "icon": "assets/soularcana/textures/item/spell_globe.png",
   "environment": "*",
   "entrypoints": {
     "main": [
