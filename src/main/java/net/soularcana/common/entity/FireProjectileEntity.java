@@ -26,7 +26,7 @@ public class FireProjectileEntity extends GlobeProjectileEntity
                 new ProjectileDamageSource("fire_globe", this, world.getPlayerByUuid(getCasterId()))
                         .setFire()
                         .setProjectile(),
-                4F);
+                2F);
 
         if (target instanceof LivingEntity living)
             living.setOnFireFor(2);

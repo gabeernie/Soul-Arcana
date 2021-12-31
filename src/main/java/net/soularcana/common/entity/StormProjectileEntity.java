@@ -26,7 +26,7 @@ public class StormProjectileEntity extends GlobeProjectileEntity
                 new ProjectileDamageSource("storm_globe", this, world.getPlayerByUuid(getCasterId()))
                         .setUsesMagic()
                         .setProjectile(),
-                world.isRaining() ? 8F : 4F);
+                world.isRaining() ? 6F : 3F);
 
         if (target instanceof LivingEntity living)
             living.takeKnockback(0.5D, target.getX() - this.getX(), target.getZ() - this.getZ());

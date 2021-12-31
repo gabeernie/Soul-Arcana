@@ -28,7 +28,7 @@ public class CurseProjectileEntity extends GlobeProjectileEntity
                 new ProjectileDamageSource("curse_globe", this, world.getPlayerByUuid(getCasterId()))
                         .setUsesMagic()
                         .setProjectile(),
-                world.random.nextInt(4) + 2);
+                world.random.nextInt(3) + 2);
 
         if (target instanceof LivingEntity living && world.random.nextBoolean())
             living.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 40));

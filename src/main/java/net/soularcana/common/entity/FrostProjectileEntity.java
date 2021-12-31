@@ -26,7 +26,7 @@ public class FrostProjectileEntity extends GlobeProjectileEntity
                 new ProjectileDamageSource("frost_globe", this, world.getPlayerByUuid(getCasterId()))
                         .setUsesMagic()
                         .setProjectile(),
-                4F);
+                2F);
 
         if (target instanceof LivingEntity living)
             living.setFrozenTicks(20);

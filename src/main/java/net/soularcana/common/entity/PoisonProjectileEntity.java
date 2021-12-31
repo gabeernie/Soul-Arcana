@@ -28,7 +28,7 @@ public class PoisonProjectileEntity extends GlobeProjectileEntity
                 new ProjectileDamageSource("poison_globe", this, world.getPlayerByUuid(getCasterId()))
                         .setUsesMagic()
                         .setProjectile(),
-                4F);
+                2F);
         if (target instanceof LivingEntity living)
             living.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 40));
 

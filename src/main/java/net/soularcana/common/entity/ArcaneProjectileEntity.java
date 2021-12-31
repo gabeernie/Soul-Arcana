@@ -26,7 +26,7 @@ public class ArcaneProjectileEntity extends GlobeProjectileEntity
                         .setUsesMagic()
                         .setBypassesArmor()
                         .setProjectile(),
-                4F);
+                3F);
         onImpact(hitResult);
     }
 
