@@ -8,7 +8,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.soularcana.GlobeType;
 import net.soularcana.SoulArcana;
-import net.soularcana.common.entity.SoulType;
 import net.soularcana.common.item.SoulGemItem;
 import net.soularcana.common.item.SpellGlobeItem;
 import net.soularcana.common.item.SpellStaffItem;
@@ -50,15 +49,10 @@ public class SoulArcanaItems
 
         registerItem(SPELL_GLOBE = new SpellGlobeItem(new Settings().group(SoulArcana.ITEMGROUP)), "spell_globe");
 
-        registerItem(LESSER_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP)), "lesser_soul_gem");
-        registerItem(MIDDLING_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP)), "middling_soul_gem");
-        registerItem(GREATER_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP)), "greater_soul_gem");
-        registerItem(TITANIC_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP)), "titanic_soul_gem");
-
-        SoulArcanaRecipes.registerGemRepairValue(LESSER_SOUL_GEM, 12);
-        SoulArcanaRecipes.registerGemRepairValue(MIDDLING_SOUL_GEM, 25);
-        SoulArcanaRecipes.registerGemRepairValue(GREATER_SOUL_GEM, 50);
-        SoulArcanaRecipes.registerGemRepairValue(TITANIC_SOUL_GEM, 100);
+        registerItem(LESSER_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP), 8), "lesser_soul_gem");
+        registerItem(MIDDLING_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP), 16), "middling_soul_gem");
+        registerItem(GREATER_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP), 32), "greater_soul_gem");
+        registerItem(TITANIC_SOUL_GEM = new SoulGemItem(new Settings().group(SoulArcana.ITEMGROUP), 64), "titanic_soul_gem");
 
         registerItem(SOUL_SHARD = new Item(new Settings().group(SoulArcana.ITEMGROUP)), "soul_shard");
     }
@@ -66,16 +60,5 @@ public class SoulArcanaItems
     public static void registerItem(Item item, String name)
     {
         Registry.register(Registry.ITEM, new Identifier(SoulArcana.MODID, name), item);
-    }
-
-    public static Item getSoulGemForType(SoulType type)
-    {
-        return switch (type)
-                {
-                    case LESSER -> LESSER_SOUL_GEM;
-                    case MIDDLING -> MIDDLING_SOUL_GEM;
-                    case GREATER -> GREATER_SOUL_GEM;
-                    case TITANIC -> TITANIC_SOUL_GEM;
-                };
     }
 }

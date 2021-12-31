@@ -1,6 +1,5 @@
 package net.soularcana.common.setup;
 
-import net.minecraft.item.Item;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.ShapedRecipe;
@@ -15,13 +14,8 @@ import net.soularcana.common.recipe.DurabilityAwareShapelessRecipe;
 import net.soularcana.common.recipe.GlobeStaffRepairRecipe;
 import net.soularcana.common.recipe.GlobeToStaffRecipe.GlobeToStaffSerializer;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class SoulArcanaRecipes
 {
-    private static final Map<Item, Integer> gemRepairValueMap = new HashMap<>();
-
     public static RecipeSerializer<SmithingRecipe>         GLOBE_TO_STAFF_SERIALIZER;
     public static RecipeSerializer<GlobeStaffRepairRecipe> GLOBE_STAFF_REPAIR_SERIALIZER;
     public static RecipeSerializer<ShapelessRecipe>        DURABILITY_AWARE_SHAPELESS_SERIALIZER;
@@ -39,15 +33,5 @@ public class SoulArcanaRecipes
     private static <T extends Recipe<?>> void registerSerializer(RecipeSerializer<T> serializer, String name)
     {
         Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(SoulArcana.MODID, name), serializer);
-    }
-
-    public static int getGemRepairValue(Item item)
-    {
-        return gemRepairValueMap.getOrDefault(item, 0);
-    }
-
-    public static void registerGemRepairValue(Item gemItem, int value)
-    {
-        gemRepairValueMap.put(gemItem, value);
     }
 }

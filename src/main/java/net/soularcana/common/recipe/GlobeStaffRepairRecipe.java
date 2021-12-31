@@ -33,7 +33,7 @@ public class GlobeStaffRepairRecipe extends SpecialCraftingRecipe
             if (stack.isEmpty())
                 continue;
 
-            if (SoulArcanaItems.TAG_SOUL_GEMS.contains(stack.getItem()) && stack.hasNbt() && stack.getNbt().contains("filled"))
+            if (SoulArcanaItems.TAG_SOUL_GEMS.contains(stack.getItem()) && stack.getDamage() != stack.getMaxDamage())
             {
                 if (matches.size() == 1 && SoulArcanaItems.TAG_SOUL_GEMS.contains(matches.get(0).getItem()))
                     break;
@@ -61,7 +61,7 @@ public class GlobeStaffRepairRecipe extends SpecialCraftingRecipe
             if (stack.isEmpty())
                 continue;
 
-            if (SoulArcanaItems.TAG_SOUL_GEMS.contains(stack.getItem()) && stack.hasNbt() && stack.getNbt().contains("filled"))
+            if (SoulArcanaItems.TAG_SOUL_GEMS.contains(stack.getItem()) && stack.getDamage() != stack.getMaxDamage())
             {
                 if (matches.size() == 1 && SoulArcanaItems.TAG_SOUL_GEMS.contains(matches.get(0).getItem()))
                     return ItemStack.EMPTY;
@@ -91,7 +91,9 @@ public class GlobeStaffRepairRecipe extends SpecialCraftingRecipe
             toRepair = matches.get(0).copy();
             ingredient = matches.get(1);
         }
-        var durabilityToRepair = SoulArcanaRecipes.getGemRepairValue(ingredient.getItem());
+
+        var durabilityToRepair = ingredient.getMaxDamage() - ingredient.getDamage();
+        durabilityToRepair *= 4;
         toRepair.setDamage(toRepair.getDamage() - durabilityToRepair);
 
         return toRepair;
@@ -107,7 +109,31 @@ public class GlobeStaffRepairRecipe extends SpecialCraftingRecipe
             if (item.hasRecipeRemainder())
                 remainderList.set(i, new ItemStack(item.getRecipeRemainder()));
             else if (SoulArcanaItems.TAG_SOUL_GEMS.contains(item))
-                remainderList.set(i, new ItemStack(item));
+            {
+                var soulGem = new ItemStack(item);
+                var staff = ItemStack.EMPTY;
+
+                for (int j = 0; j < inventory.size(); j++)
+                {
+                    var stack = inventory.getStack(j);
+
+                    if (stack.isEmpty())
+                        continue;
+
+                    if (stack.getItem() instanceof SpellStaffItem || stack.getItem() instanceof SpellGlobeItem)
+                    {
+                        staff = stack;
+                        break;
+                    }
+                }
+
+                if (staff.isEmpty())
+                    continue;
+
+                var durabilityToRepair = staff.getDamage() / 4;
+                soulGem.setDamage(Math.max(soulGem.getMaxDamage(), soulGem.getDamage() + durabilityToRepair));
+                remainderList.set(i, soulGem);
+            }
         }
 
         return remainderList;

@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "soularcana:durability_aware_shapeless",
   "ingredients": [
     {
       "item": "soularcana:lesser_soul_gem"
@@ -10,6 +10,7 @@
   ],
   "result": {
     "item": "soularcana:middling_soul_gem",
-    "count": 1
+    "count": 1,
+    "durability": "SUM"
   }
 }

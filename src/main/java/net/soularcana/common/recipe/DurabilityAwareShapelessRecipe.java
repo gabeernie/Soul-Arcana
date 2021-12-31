@@ -3,6 +3,7 @@ package net.soularcana.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
@@ -14,9 +15,32 @@ import net.soularcana.common.setup.SoulArcanaRecipes;
 
 public class DurabilityAwareShapelessRecipe extends ShapelessRecipe
 {
-    public DurabilityAwareShapelessRecipe(Identifier id, String group, ItemStack output, DefaultedList<Ingredient> input)
+    private final boolean sumInputDurability;
+
+    public DurabilityAwareShapelessRecipe(Identifier id,
+                                          String group,
+                                          ItemStack output,
+                                          DefaultedList<Ingredient> input,
+                                          boolean sumInputDurability)
     {
         super(id, group, output, input);
+
+        this.sumInputDurability = sumInputDurability;
+    }
+
+    @Override
+    public ItemStack craft(CraftingInventory craftingInventory)
+    {
+        var result = getOutput().copy();
+        if (sumInputDurability)
+        {
+            var damageSum = 0;
+
+            for (int i = 0; i < craftingInventory.size(); i++)
+                damageSum += craftingInventory.getStack(i).getMaxDamage() - craftingInventory.getStack(i).getDamage();
+            result.setDamage(result.getMaxDamage() - damageSum);
+        }
+        return result;
     }
 
     @Override
@@ -37,8 +61,8 @@ public class DurabilityAwareShapelessRecipe extends ShapelessRecipe
             if (ingredients.size() > 9)
                 throw new JsonParseException("Too many ingredients for shapeless recipe");
 
-            var itemStack = DurabilityIngredientUtil.outputFromJSON(JsonHelper.getObject(jsonObject, "result"));
-            return new DurabilityAwareShapelessRecipe(identifier, group, itemStack, ingredients);
+            var output = DurabilityIngredientUtil.outputFromJSON(JsonHelper.getObject(jsonObject, "result"));
+            return new DurabilityAwareShapelessRecipe(identifier, group, output.output(), ingredients, output.sumInputDurability());
         }
 
         private static DefaultedList<Ingredient> getIngredients(JsonArray json)
@@ -51,10 +75,7 @@ public class DurabilityAwareShapelessRecipe extends ShapelessRecipe
                 if (!ingredient.isEmpty())
                     ingredients.add(ingredient);
             }
-
             return ingredients;
         }
-
-
     }
 }

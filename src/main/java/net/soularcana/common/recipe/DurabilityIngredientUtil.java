@@ -12,15 +12,28 @@ import org.jetbrains.annotations.Nullable;
 @UtilityClass
 public class DurabilityIngredientUtil
 {
-    public ItemStack outputFromJSON(JsonObject json)
+    public record DurabilityAwareOutput(ItemStack output, boolean sumInputDurability) {}
+
+    public DurabilityAwareOutput outputFromJSON(JsonObject json)
     {
         var item = ShapedRecipe.getItem(json);
         var stack = new ItemStack(item);
 
         if (json.has("durability"))
-            stack.setDamage(stack.getMaxDamage() - json.get("durability").getAsInt());
+        {
+            if (json.get("durability").getAsString().equals("SUM"))
+            {
+                stack.setDamage(stack.getMaxDamage());
+                return new DurabilityAwareOutput(stack, true);
+            }
+            else
+            {
+                stack.setDamage(stack.getMaxDamage() - json.get("durability").getAsInt());
+                return new DurabilityAwareOutput(stack, false);
+            }
+        }
 
-        return stack;
+        return new DurabilityAwareOutput(stack, false);
     }
 
     public Ingredient ingredientFromJSON(@Nullable JsonElement json)

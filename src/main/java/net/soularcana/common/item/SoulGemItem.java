@@ -1,43 +1,31 @@
 package net.soularcana.common.item;
 
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.world.World;
-import net.soularcana.SoulArcana;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
+import net.minecraft.util.collection.DefaultedList;
 
 public class SoulGemItem extends Item
 {
-    public SoulGemItem(Settings settings)
+    public SoulGemItem(Settings settings, int maxDurability)
     {
-        super(settings);
+        super(settings.maxDamage(maxDurability));
     }
 
     @Override
-    public String getTranslationKey(ItemStack stack)
+    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks)
     {
-        if (!stack.hasNbt() || !stack.getNbt().contains("filled"))
-            return super.getTranslationKey(stack);
-        return super.getTranslationKey(stack) + ".filled";
+        if (this.isIn(group))
+        {
+            var soulGem = new ItemStack(this);
+            soulGem.setDamage(soulGem.getMaxDamage());
+            stacks.add(soulGem);
+        }
     }
 
     @Override
     public boolean hasGlint(ItemStack stack)
     {
-        return stack.hasNbt() && stack.getNbt().contains("filled") || super.hasGlint(stack);
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
-    {
-        super.appendTooltip(stack, world, tooltip, context);
-
-        if (stack.hasNbt() && stack.getNbt().contains("filled"))
-            tooltip.add(new TranslatableText(SoulArcana.MODID + ".soul_gem.lore", Text.Serializer.fromJson(stack.getNbt().getString("filled"))));
+        return stack.hasNbt() && stack.getDamage() != stack.getMaxDamage() || super.hasGlint(stack);
     }
 }

@@ -3,6 +3,7 @@ package net.soularcana.common.recipe;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
@@ -16,9 +17,34 @@ import java.util.Map;
 
 public class DurabilityAwareShapedRecipe extends ShapedRecipe
 {
-    public DurabilityAwareShapedRecipe(Identifier id, String group, int width, int height, DefaultedList<Ingredient> input, ItemStack output)
+    private final boolean sumInputDurability;
+
+    public DurabilityAwareShapedRecipe(Identifier id,
+                                       String group,
+                                       int width,
+                                       int height,
+                                       DefaultedList<Ingredient> input,
+                                       ItemStack output,
+                                       boolean sumInputDurability)
     {
         super(id, group, width, height, input, output);
+
+        this.sumInputDurability = sumInputDurability;
+    }
+
+    @Override
+    public ItemStack craft(CraftingInventory craftingInventory)
+    {
+        var result = getOutput().copy();
+        if (sumInputDurability)
+        {
+            var damageSum = 0;
+
+            for (int i = 0; i < craftingInventory.size(); i++)
+                damageSum += craftingInventory.getStack(i).getMaxDamage() - craftingInventory.getStack(i).getDamage();
+            result.setDamage(result.getMaxDamage() - damageSum);
+        }
+        return result;
     }
 
     @Override
@@ -40,7 +66,7 @@ public class DurabilityAwareShapedRecipe extends ShapedRecipe
             var defaultedList = ShapedRecipe.createPatternMatrix(patterns, ingredientBySymbolMap, width, height);
             var result = DurabilityIngredientUtil.outputFromJSON(JsonHelper.getObject(jsonObject, "result"));
 
-            return new ShapedRecipe(identifier, group, width, height, defaultedList, result);
+            return new DurabilityAwareShapedRecipe(identifier, group, width, height, defaultedList, result.output(), result.sumInputDurability());
         }
 
         private static Map<String, Ingredient> readSymbols(JsonObject json)

@@ -55,7 +55,7 @@ public class SoulArcanaEnchantments
     {
         protected GlobeEnchantment()
         {
-            super(Rarity.UNCOMMON, GLOBE_TYPE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+            super(Rarity.VERY_RARE, GLOBE_TYPE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         }
 
         public int getMinPower(int level)
@@ -66,6 +66,12 @@ public class SoulArcanaEnchantments
         public int getMaxPower(int level)
         {
             return super.getMinPower(level) + 50;
+        }
+
+        @Override
+        protected boolean canAccept(Enchantment other)
+        {
+            return other.type == EnchantmentTarget.BREAKABLE;
         }
     }
 }
